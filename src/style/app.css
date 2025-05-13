@@ -155,4 +155,13 @@
     .link {
         @apply hover:text-foreground/80 focus-visible:ring-foreground focus-visible:ring-offset-background inline-flex items-center gap-1 rounded-xs font-medium underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden;
     }
+    .btn {
+        @apply cursor-pointer h-10 px-4 py-2 bg-contrast text-white dark:text-black hover:bg-contrast/90 ring-offset-background focus-visible:ring-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    }
+
+    .btn-icon {
+        @apply h-10 w-10;
+    }
+    .test {
+    }
 }
