@@ -5,6 +5,7 @@ const speedSlider = document.getElementById("speedControl");
 const speedLabel = document.getElementById("speedValue");
 const buttonsContainer = document.getElementById("algorithmButtons");
 const pauseToggleIcon = document.getElementById("pauseToggleIcon");
+const resetButton = document.getElementById("resetButton");
 
 let values = [];
 let isPaused = false;
@@ -35,8 +36,7 @@ function togglePause() {
 }
 
 function reset() {
-  generateBars();
-  isSorting = false;
+  if (!isSorting) generateBars();
 }
 
 // GENERATE BARS
@@ -124,6 +124,7 @@ function registerSort(name, func) {
 
 async function runSort(name) {
   if (isSorting) return;
+  resetButton.toggleAttribute("disabled");
   isSorting = true;
 
   for (let i = 0; i < values.length; i++) {
@@ -147,6 +148,7 @@ async function runSort(name) {
     await delay(2);
   }
 
+  resetButton.toggleAttribute("disabled");
   isSorting = false;
 }
 
