@@ -34,6 +34,11 @@ function togglePause() {
   }
 }
 
+function reset() {
+  generateBars();
+  isSorting = false;
+}
+
 // GENERATE BARS
 function generateBars() {
   barsContainer.innerHTML = "";
@@ -121,6 +126,11 @@ async function runSort(name) {
   if (isSorting) return;
   isSorting = true;
 
+  for (let i = 0; i < values.length; i++) {
+    changeColor(i, "bg-white");
+    await delay(2);
+  }
+
   const ctx = {
     values,
     swap,
@@ -145,14 +155,68 @@ registerSort(
   async ({ values, swap, highlight, markSorted, wait }) => {
     const n = values.length;
     for (let i = 0; i < n; i++) {
+      let swapped = false;
+
       for (let j = 0; j < n - i - 1; j++) {
+        await highlight(j, j + 1);
         if (values[j] > values[j + 1]) {
-          await highlight(j, j + 1);
           await swap(j, j + 1);
+          swapped = true;
         }
       }
+
       markSorted(n - i - 1);
+
+      if (!swapped) {
+        for (let k = 0; k < n - i - 1; k++) {
+          markSorted(k);
+          await delay(2);
+        }
+        break;
+      }
     }
+  },
+);
+
+registerSort(
+  "Quick Sort",
+  async ({ values, swap, highlight, markSorted, wait }) => {
+    const quickSort = async (left, right) => {
+      if (left >= right) {
+        if (left === right) markSorted(left);
+        return;
+      }
+
+      let pivotIndex = Math.floor((left + right) / 2);
+      let pivot = values[pivotIndex];
+
+      changeColor(pivotIndex, "bg-yellow-400");
+      await wait();
+
+      let i = left,
+        j = right;
+      while (i <= j) {
+        while (values[i] < pivot) {
+          i++;
+        }
+        while (values[j] > pivot) {
+          j--;
+        }
+        if (i <= j) {
+          await highlight(i, j);
+          await swap(i, j);
+          i++;
+          j--;
+        }
+      }
+
+      changeColor(pivotIndex, "bg-white");
+
+      await quickSort(left, j);
+      await quickSort(i, right);
+    };
+
+    await quickSort(0, values.length - 1);
   },
 );
 
