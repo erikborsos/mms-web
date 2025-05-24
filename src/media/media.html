@@ -22,6 +22,27 @@
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
         let originalImageData = null;
 
+        window.onload = function () {
+            // Create and load an image
+            const img = new Image();
+            img.crossOrigin = "Anonymous"; // For external images if CORS allows
+            img.onload = function() {
+                // Set canvas dimensions to match image
+                canvas.width = this.width;
+                canvas.height = this.height;
+
+                // Draw the image
+                ctx.drawImage(this, 0, 0);
+
+                // Store original pixel data if you want to apply filters later
+                originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            };
+
+            // Set image source (can be relative path or full URL)
+            console.log("hi")
+            img.src = "./squirrel.jpg"; // Local path
+        }
+
         document.getElementById("imageUpload").oninput = async (evt) => {
             try {
                 const file = evt.target.files[0];
