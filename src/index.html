@@ -1,10 +1,121 @@
 <!doctype html>
 <html lang="en" class="dark">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style/app.css" />
-        <title>MMS Web</title>
-    </head>
-    <body></body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/app.css" />
+    <link rel="stylesheet" href="style/homepage.css" />
+    <title>MMS Web</title>
+</head>
+<body class="min-h-screen flex flex-col bg-white text-black dark:bg-black dark:text-white">
+
+<header class="navbar">
+    <ul class="navbar-list">
+        <li class="navbar-item group">
+            <img src="https://img.icons8.com/?size=100&id=86527&format=png&color=FFFFFF" alt="Home" class="icon-dark" />
+            <img src="https://img.icons8.com/?size=100&id=86527&format=png&color=1A1A1A" alt="Home" class="icon-light" />
+            <span class="navbar-text">Home</span>
+            <span class="navbar-underline"></span>
+        </li>
+        <li class="navbar-divider"></li>
+
+        <li class="navbar-item group">
+            <img src="https://img.icons8.com/?size=100&id=21890&format=png&color=FFFFFF" alt="Sortierung" class="icon-dark" />
+            <img src="https://img.icons8.com/?size=100&id=21890&format=png&color=1A1A1A" alt="Sortierung" class="icon-light" />
+            <span class="navbar-text">Sortierung</span>
+            <span class="navbar-underline"></span>
+        </li>
+        <li class="navbar-divider"></li>
+
+        <li class="navbar-item group">
+            <img src="https://img.icons8.com/?size=100&id=47421&format=png&color=FFFFFF" alt="Tetris" class="icon-dark" />
+            <img src="https://img.icons8.com/?size=100&id=47421&format=png&color=1A1A1A" alt="Tetris" class="icon-light" />
+            <span class="navbar-text">Tetris</span>
+            <span class="navbar-underline"></span>
+        </li>
+        <li class="navbar-divider"></li>
+
+        <li class="navbar-item group">
+            <img src="https://img.icons8.com/?size=100&id=iUDJxrHYhzTG&format=png&color=FFFFFF" alt="3D" class="icon-dark" />
+            <img src="https://img.icons8.com/?size=100&id=iUDJxrHYhzTG&format=png&color=1A1A1A" alt="3D" class="icon-light" />
+            <span class="navbar-text">3D</span>
+            <span class="navbar-underline"></span>
+        </li>
+        <li class="navbar-divider"></li>
+
+        <li class="navbar-item group">
+            <img src="https://img.icons8.com/?size=100&id=111366&format=png&color=FFFFFF" alt="Video" class="icon-dark" />
+            <img src="https://img.icons8.com/?size=100&id=111366&format=png&color=1A1A1A" alt="Video" class="icon-light" />
+            <span class="navbar-text">Video</span>
+            <span class="navbar-underline"></span>
+        </li>
+    </ul>
+
+    <button id="darkToggle" type="button" class="navbar-toggle transition-transform duration-300 hover:scale-110">
+        <img src="https://img.icons8.com/?size=100&id=59841&format=png&color=FFFFFF" class="icon-dark" alt="Dark Icon" />
+        <img src="https://img.icons8.com/?size=100&id=648&format=png&color=1A1A1A" class="icon-light" alt="Light Icon" />
+    </button>
+</header>
+
+<section class="section-content flex items-center justify-center h-[100vh] bg-white text-black dark:bg-black dark:text-white text-center">
+    <div>
+        <h1 class="text-4xl md:text-7xl font-bold">Mehr als Code. Eine digitale Bühne.</h1>
+        <p class="mt-4 text-3xl dark:text-gray-300 text-neutral-800 font-bold">Tauche ein in eine Welt, in der Sortieralgorithmen greifbar werden, Gaming logisches Denken in Echtzeit fordert, 3D-Objekte Form annehmen und Videos mehr als nur Bilder sind.</p>
+    </div>
+</section>
+
+<main class="flex-1">
+
+
+    <section class="parallax-pin">
+        <div class="parallax-inner">
+            <div class="parallax-background" style="background-image: url('https://images.unsplash.com/photo-1634745291366-4e4d79b2497a?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="parallax-content">
+                <p class="section-subtext">Sortieralgorithmen</p>
+                <h2>Logik in Bewegung</h2>
+            </div>
+        </div>
+    </section>
+    <section class="section-content fade-up"></section>
+
+    <section class="parallax-pin">
+        <div class="parallax-inner">
+            <div class="parallax-background" style="background-image: url('https://images.unsplash.com/photo-1621284468753-fdb93b611dc5?q=80&w=3432');"></div>
+            <div class="parallax-content">
+                <p class="section-subtext">Tetris</p>
+                <h2>Spiel trifft Struktur</h2>
+            </div>
+        </div>
+    </section>
+    <section class="section-content fade-up"></section>
+
+    <section class="parallax-pin">
+        <div class="parallax-inner">
+            <div class="parallax-background" style="background-image: url('https://images.unsplash.com/photo-1627021849826-8d699a92f4fe?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="parallax-content">
+                <p class="section-subtext">3-Dimensionen</p>
+                <h2>Form wird digital</h2>
+            </div>
+        </div>
+    </section>
+    <section class="section-content fade-up"></section>
+
+    <section class="parallax-pin">
+        <div class="parallax-inner">
+            <div class="parallax-background" style="background-image: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=3518');"></div>
+            <div class="parallax-content">
+                <p class="section-subtext">Video</p>
+                <h2>Mehr als bewegte Bilder</h2>
+            </div>
+        </div>
+    </section>
+    <section class="section-content fade-up"></section>
+
+</main>
+
+<footer class="footer">
+    © 2025 MMS Web – Alle Rechte vorbehalten.
+</footer>
+<script type="module" src="index.js"></script>
+</body>
 </html>

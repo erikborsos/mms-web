@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@tailwind utilities;
+
+@layer utilities {
+    .fade-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.parallax-pin {
+    height: 200vh;
+    position: relative;
+}
+
+.parallax-inner {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-background {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.parallax-content {
+    @apply flex flex-col justify-center items-center text-center text-white h-full;
+    z-index: 1;
+}
+
+.parallax-content h2 {
+    @apply text-6xl md:text-8xl font-bold;
+}
+
+.section-subtext {
+    @apply mt-4 text-4xl font-bold text-white;
+}
+
+.section-content {
+    @apply min-h-[80vh] p-6 bg-white dark:bg-black text-neutral-900 dark:text-white;
+}
+
+.navbar {
+    @apply sticky top-0 z-50 flex items-center justify-between border-b border-white/10 px-6 py-4 backdrop-blur-md bg-neutral-200 dark:bg-neutral-900;
+}
+
+.navbar-list {
+    @apply flex flex-row flex-wrap w-9/12 items-center justify-between dark:text-white text-black text-sm md:text-lg;
+}
+
+.navbar-item {
+    @apply flex-1 relative flex items-center justify-center gap-2 cursor-pointer transition-transform duration-200 hover:-translate-y-1;
+}
+
+.navbar-text {
+    @apply text-black dark:text-white/50 dark:group-hover:text-white dark:group-hover:font-bold  group-hover:text-black group-hover:font-bold transition-colors duration-300;
+}
+
+.navbar-underline {
+    @apply absolute -bottom-1 left-1/2 w-0 h-1 rounded-full bg-black dark:bg-white transition-all duration-300 group-hover:w-6 group-hover:-translate-x-1/2;
+}
+
+.navbar-divider {
+    @apply h-6 w-px dark:bg-white/30 bg-black self-center;
+}
+
+.navbar-toggle {
+    @apply ml-4 flex items-center;
+}
+
+.footer {
+    @apply relative z-10 min-h-[20vh] bg-neutral-200 p-6 text-black dark:text-white dark:bg-neutral-900 font-bold flex justify-center items-center
+}
+
+@layer components {
+    .icon-light {
+        @apply block dark:hidden h-7 w-7;
+    }
+
+    .icon-dark {
+        @apply hidden dark:block h-7 w-7;
+    }
+}
+
+#darkToggle {
+    transition: transform 0.15s ease;
+}
+.scale-90 {
+    transform: scale(0.9);
+}
