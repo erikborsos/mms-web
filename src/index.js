@@ -1,6 +1,16 @@
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
+const theme = localStorage.getItem("theme");
+if (
+    theme === "dark" ||
+    (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+) {
+    document.documentElement.classList.add("dark");
+} else {
+    document.documentElement.classList.remove("dark");
+}
+
 gsap.registerPlugin(ScrollTrigger);
 
 gsap.utils.toArray(".parallax-pin").forEach(section => {
@@ -37,30 +47,3 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 fadeUps.forEach(el => observer.observe(el));
-
-
-const darkToggle = document.getElementById('darkToggle');
-const html = document.documentElement;
-
-document.addEventListener("DOMContentLoaded", () => {
-    const toggleButton = document.getElementById("darkToggle");
-    const html = document.documentElement;
-
-    // Theme aus localStorage anwenden
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-        html.classList.add("dark");
-    } else if (storedTheme === "light") {
-        html.classList.remove("dark");
-    }
-
-    toggleButton.addEventListener("click", () => {
-        const isDark = html.classList.toggle("dark");
-
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-
-        // kleine Klickanimation
-        toggleButton.classList.add("scale-90");
-        setTimeout(() => toggleButton.classList.remove("scale-90"), 150);
-    });
-});

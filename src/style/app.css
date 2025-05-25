@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./homepage.css";
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -165,3 +167,4 @@
     .test {
     }
 }
+

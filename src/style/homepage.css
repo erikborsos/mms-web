@@ -52,7 +52,7 @@
 }
 
 .navbar {
-    @apply sticky top-0 z-50 flex items-center justify-between border-b border-white/10 px-6 py-4 backdrop-blur-md bg-neutral-200 dark:bg-neutral-900;
+    @apply sticky top-0 z-50 flex items-center justify-between border-b border-white/10 px-6 py-2 backdrop-blur-md bg-neutral-200 dark:bg-neutral-900;
 }
 
 .navbar-list {
@@ -64,7 +64,8 @@
 }
 
 .navbar-text {
-    @apply text-black dark:text-white/50 dark:group-hover:text-white dark:group-hover:font-bold  group-hover:text-black group-hover:font-bold transition-colors duration-300;
+    @apply text-black dark:text-white/50 dark:group-hover:text-white dark:group-hover:font-bold
+    group-hover:text-black group-hover:font-bold transition-colors duration-300 md:text-sm;
 }
 
 .navbar-underline {
@@ -85,11 +86,11 @@
 
 @layer components {
     .icon-light {
-        @apply block dark:hidden h-7 w-7;
+        @apply block dark:hidden h-6 w-6;
     }
 
     .icon-dark {
-        @apply hidden dark:block h-7 w-7;
+        @apply hidden dark:block h-6 w-6;
     }
 }
 
