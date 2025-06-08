@@ -1,8 +1,8 @@
 const canvasAudio = document.getElementById('canvasAudio');
 const ctxAudio = canvasAudio.getContext('2d');
 const audio = document.getElementById('audio');
-const green = Math.random() * 255;
-const blue = Math.random() * 255;
+let green = Math.random() * 255;
+let blue = Math.random() * 255;
 
 let audioCtx, analyser, source;
 
@@ -71,4 +71,9 @@ function visualize() {
     }
 
     draw();
+}
+
+function randomizeColors() {
+    green = Math.random() * 255;
+    blue = Math.random() * 255;
 }

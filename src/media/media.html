@@ -4,10 +4,14 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../style/app.css" />
+        <link rel="stylesheet" href="style.css" />
         <title>MMS Web</title>
     </head>
     <body>
 
+    <h1>Mediengallerie</h1>
+
+    <h2>Bild</h2>
     <div class="flex flex-col items-center space-y-4">
         <div class="flex flex-col items-center">
             <div class="controls m-2 flex space-x-2">
@@ -26,11 +30,16 @@
 
             <canvas id="canvasImage"></canvas>
         </div>
+        <h2>Audio</h2>
         <div class="flex flex-col space-y-4 items-center">
-            <input class="btn" type="file" id="audioUpload" accept="audio/*"/>
+            <div>
+                <input class="btn" type="file" id="audioUpload" accept="audio/*"/>
+                <button class="btn px-3" onclick="randomizeColors()"><i class="fas fa-dice"></i></button>
+            </div>
             <canvas id="canvasAudio" width="800" height="300"></canvas>
             <audio id="audio" controls></audio>
         </div>
+        <h2>Video</h2>
         <div class="flex flex-col space-y-2 items-center mb-2">
             <video id="video" src="NeverGonnaGiveYouUp.mp4" width="960" class="max-w-none mb-0"></video>
             <div class="w-full px-2 bg-black pb-2">
