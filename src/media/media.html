@@ -20,19 +20,24 @@
                 <button class="btn" onclick="callThresholdFilter()">Threshold</button>
                 <button class="btn" onclick="applyInvertFilter()">Invert</button>
                 <button class="btn" onclick="applySepiaFilter()">Sepia</button>
+                <button class="btn" onclick="callSubsamplingFilter()">Subsampling</button>
                 <button class="btn" onclick="resetImage()">Reset</button>
             </div>
 
-            <div id="slider-container" class="flex-col space-x-2 m-2 hidden">
+            <div id="thresholdSliderContainer" class="flex-col space-x-2 m-2 hidden">
                 <label for="thresholdSlider">Threshold: <span id="thresholdValue">128</span></label>
                 <input type="range" id="thresholdSlider" min="0" max="255" value="128" class="w-32">
+            </div>
+            <div id="subsamplingSliderContainer" class="flex-col space-x-2 m-2 hidden">
+                <label for="thresholdSlider">Sampling Rate: <span id="subsamplingValue">4</span></label>
+                <input type="range" id="subsamplingSlider" min="1" max="8" value="4" class="w-32">
             </div>
 
             <canvas id="canvasImage"></canvas>
         </div>
         <h2>Audio</h2>
         <div class="flex flex-col space-y-4 items-center">
-            <div>
+            <div class="flex space-x-2 items-center">
                 <input class="btn" type="file" id="audioUpload" accept="audio/*"/>
                 <button class="btn px-3" onclick="randomizeColors()"><i class="fas fa-dice"></i></button>
             </div>

@@ -56,6 +56,9 @@ video.addEventListener("loadedmetadata", () => {
 });
 
 volumeSlider.addEventListener("input", () => {
+    if (video.muted) {
+        video.muted = !video.muted;
+    }
     video.volume = volumeSlider.value;
     adjustVolumeIcon();
 });

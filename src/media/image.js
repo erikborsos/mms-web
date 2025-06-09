@@ -4,9 +4,15 @@ let originalImageData = null;
 
 const thresholdSlider = document.getElementById('thresholdSlider');
 const thresholdValue = document.getElementById('thresholdValue');
-const sliderContainer = document.getElementById('slider-container');
+const thresholdSliderContainer = document.getElementById('thresholdSliderContainer');
 let currentThreshold = 128;
 let thresholdActive = false;
+
+const subsamplingSlider = document.getElementById('subsamplingSlider');
+const subsamplingValue = document.getElementById('subsamplingValue');
+const subsamplingSliderContainer = document.getElementById('subsamplingSliderContainer');
+let subsamplingRate = 4;
+let subsamplingActive = false;
 
 thresholdSlider.addEventListener('input', () => {
     currentThreshold = parseInt(thresholdSlider.value);
@@ -15,6 +21,16 @@ thresholdSlider.addEventListener('input', () => {
     if (originalImageData && thresholdActive) {
         applyThresholdFilter();
     }
+});
+
+subsamplingSlider.addEventListener('input', () => {
+    subsamplingRate = parseInt(subsamplingSlider.value);
+    subsamplingValue.textContent = subsamplingRate;
+
+    if (originalImageData && subsamplingActive) {
+        applySubsamplingFilter();
+    }
+
 })
 
 window.addEventListener("load", () => {
@@ -60,13 +76,16 @@ function applyGrayscaleFilter() {
 
 function callThresholdFilter() {
     thresholdActive = true;
-    sliderContainer.classList.remove('hidden');
-    sliderContainer.classList.add('flex');
+    thresholdSliderContainer.classList.remove('hidden');
+    thresholdSliderContainer.classList.add('flex');
     applyThresholdFilter();
 }
 
 function applyThresholdFilter() {
     ctx.putImageData(originalImageData, 0, 0);
+    subsamplingActive = false;
+    subsamplingSliderContainer.classList.remove('flex');
+    subsamplingSliderContainer.classList.add('hidden');
 
     const threshold = currentThreshold;
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -112,9 +131,52 @@ function applySepiaFilter() {
     ctx.putImageData(imageData, 0, 0);
 }
 
+function callSubsamplingFilter() {
+    subsamplingActive = true;
+    subsamplingSliderContainer.classList.remove('hidden');
+    subsamplingSliderContainer.classList.add('flex');
+    applySubsamplingFilter();
+}
+
+function applySubsamplingFilter() {
+    ctx.putImageData(originalImageData, 0, 0);
+    thresholdActive = false;
+    thresholdSliderContainer.classList.remove('flex');
+    thresholdSliderContainer.classList.add('hidden');
+
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const originalData = data;
+
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            const srcX = x - (x % subsamplingRate);
+            const srcY = y - (y % subsamplingRate);
+
+            const srcIndex = (srcY * width + srcX) * 4;
+            const destIndex = (y * width + x) * 4;
+
+            data[destIndex]     = originalData[srcIndex];
+            data[destIndex + 1] = originalData[srcIndex + 1];
+            data[destIndex + 2] = originalData[srcIndex + 2];
+            data[destIndex + 3] = originalData[srcIndex + 3];
+        }
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+}
+
 function resetImage() {
     ctx.putImageData(originalImageData, 0, 0);
     thresholdActive = false;
-    sliderContainer.classList.remove('flex');
-    sliderContainer.classList.add('hidden');
+    thresholdSliderContainer.classList.remove('flex');
+    thresholdSliderContainer.classList.add('hidden');
+
+    subsamplingActive = false;
+    subsamplingSliderContainer.classList.remove('flex');
+    subsamplingSliderContainer.classList.add('hidden');
 }
