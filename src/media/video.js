@@ -3,24 +3,27 @@ const playPauseBtn = document.getElementById("playPause");
 const muteBtn = document.getElementById("muteBtn");
 const seekBar = document.getElementById("seekBar");
 const volumeSlider = document.getElementById("volume");
-
+const speedMenu = document.getElementById("speedMenu");
+const speedLabel = document.getElementById("speedLabel");
 
 function playPause() {
     video.paused ? video.play() : video.pause();
 }
-// function fullscreen() {
-//     if (!document.fullscreenElement) {
-//         video.requestFullscreen();
-//     } else {
-//         document.exitFullscreen();
-//     }
-// }
-
 function forwards() {
     video.currentTime += 5;
 }
 function backwards() {
     video.currentTime -= 5;
+}
+function togglePlaybackSpeedMenu() {
+    speedMenu.classList.toggle("hidden");
+}
+function setSpeed(rate) {
+    video.playbackRate = parseFloat(rate);
+    seekBar.max = video.duration;
+}
+function updateSpeedLabel(rate) {
+    speedLabel.textContent = `Speed: ${parseFloat(rate).toFixed(2)}x`;
 }
 
 muteBtn.addEventListener('click', () => {
