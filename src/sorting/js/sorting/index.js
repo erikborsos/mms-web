@@ -17,10 +17,9 @@ import { bubbleSort } from "./algorithms/bubblesort";
 import { quickSort } from "./algorithms/quicksort";
 import { selectionSort } from "./algorithms/selectionsort";
 import { mergeSort } from "./algorithms/mergesort";
-import { heapSort } from "./algorithms/heapsort";
 import { insertionSort } from "./algorithms/insertionSort";
 
-const algorithms = {};
+export const algorithms = {};
 
 export function renderButtons() {
   buttonsContainer.innerHTML = "";
@@ -42,7 +41,7 @@ function registerSort(name, func) {
   algorithms[name] = func;
 }
 
-async function runSort(name) {
+export async function runSort(name) {
   if (isSorting) return;
   resetButton.toggleAttribute("disabled", true);
   toggleAlgorithmButtons(true);
@@ -87,8 +86,7 @@ async function runSort(name) {
 }
 
 registerSort("Bubble Sort", bubbleSort);
-registerSort("Quick Sort", quickSort);
 registerSort("Selection Sort", selectionSort);
-registerSort("Merge Sort", mergeSort);
-registerSort("Heap Sort", heapSort);
 registerSort("Insertion Sort", insertionSort);
+registerSort("Merge Sort", mergeSort);
+registerSort("Quick Sort", quickSort);

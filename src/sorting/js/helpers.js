@@ -1,18 +1,23 @@
 import { sizeSlider, barsContainer, speedSlider } from "./dom-elements.js";
 import { setPauseResolve, setValues, values, isPaused, shouldStop } from ".";
 
-export function generateBars() {
+export function generateBars(vals) {
   if (sizeSlider.valueAsNumber < 1) {
     sizeSlider.valueAsNumber = 1;
     sizeLabel.textContent = "1";
   }
   barsContainer.innerHTML = "";
-  setValues(
-    Array.from(
-      { length: sizeSlider.valueAsNumber },
-      () => Math.floor(Math.random() * (100 - 10)) + 10,
-    ),
-  );
+  if (vals) {
+    setValues(vals.slice());
+  } else {
+    setValues(
+      Array.from(
+        { length: sizeSlider.valueAsNumber },
+        () => Math.floor(Math.random() * (100 - 10)) + 10,
+      ),
+    );
+  }
+
   const barWidth = 100 / sizeSlider.valueAsNumber;
   for (let i = 0; i < sizeSlider.valueAsNumber; i++) {
     const bar = document.createElement("div");

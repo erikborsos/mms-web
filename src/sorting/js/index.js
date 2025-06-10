@@ -1,3 +1,4 @@
+import { runBenchmark } from "./benchmarking";
 import { registerEvents, swapsLabel, comparisonsLabel } from "./dom-elements";
 import { generateBars } from "./helpers";
 import { renderButtons } from "./sorting";
@@ -46,6 +47,8 @@ export function increaseSwaps(n) {
   swaps += n;
   swapsLabel.innerText = swaps;
 }
+
+document.getElementById("runBenchmark").onclick = () => runBenchmark();
 
 registerEvents();
 generateBars();
