@@ -32,7 +32,7 @@ export function renderButtons() {
   }
 }
 
-function toggleAlgorithmButtons(disable) {
+export function toggleAlgorithmButtons(disable) {
   const buttons = buttonsContainer.querySelectorAll("button");
   buttons.forEach((button) => button.toggleAttribute("disabled", disable));
 }

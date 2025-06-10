@@ -2,12 +2,15 @@ import {
   isPaused,
   isSorting,
   pauseResolve,
+  resetSwaps,
+  resetComparisons,
   setPaused,
   setPauseResolve,
   setShouldStop,
   setSorting,
 } from ".";
 import { generateBars } from "./helpers";
+import { toggleAlgorithmButtons } from "./sorting";
 import { resetBarColors } from "./sorting/visual-helpers";
 
 export const barsContainer = document.getElementById("bars");
