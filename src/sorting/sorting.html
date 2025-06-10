@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../style/app.css" />
-        <script src="sorting.js" defer></script>
+        <script type="module" src="js/index.js" defer></script>
         <link
             rel="stylesheet"
             type="text/css"
@@ -37,24 +37,16 @@
                 class="w-full bg-background-alt rounded-card p-5 flex flex-col gap-3"
             >
                 <div class="flex justify-end gap-3">
-                    <button
-                        class="btn btn-icon"
-                        id="stopButton"
-                        onclick="stop()"
-                    >
+                    <button class="btn btn-icon" id="stopButton">
                         <i class="ph-fill ph-stop scale-125"></i>
                     </button>
-                    <button class="btn btn-icon" onclick="togglePause()">
+                    <button class="btn btn-icon" id="pauseToggleButton">
                         <i
                             id="pauseToggleIcon"
                             class="ph-fill ph-pause scale-125"
                         ></i>
                     </button>
-                    <button
-                        id="resetButton"
-                        class="btn btn-icon"
-                        onclick="reset()"
-                    >
+                    <button id="resetButton" class="btn btn-icon">
                         <i
                             class="ph-fill ph-arrow-counter-clockwise scale-125"
                         ></i>
