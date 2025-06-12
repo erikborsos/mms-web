@@ -83,6 +83,11 @@ function addStar() {
 // Add 200 stars to the scene
 Array(200).fill().forEach(addStar);
 
+//zoom camera settings
+let zoomProgress = 0;
+const initialCamPos = new THREE.Vector3(-4, 4, -6);
+const targetCamPos = new THREE.Vector3(-0.63, 0.63, -2);
+
 // Main animation loop
 function animate() {
     requestAnimationFrame(animate); // Keep looping
@@ -91,6 +96,17 @@ function animate() {
 
     if (mixer) mixer.update(delta); // Update model animation
     orbitControls.update();         // Update camera movement
+
+    //Zoom
+    if (zoomProgress < 1) {
+        orbitControls.enabled = false; // camera lock
+        zoomProgress += delta * 0.6; // zoom speed
+        zoomProgress = Math.min(zoomProgress, 1);
+
+        camera.position.lerpVectors(initialCamPos, targetCamPos, zoomProgress);
+    }else{
+        orbitControls.enabled = true; // camera unlock
+    }
 
     renderer.render(scene, camera); // Draw the scene
 }
