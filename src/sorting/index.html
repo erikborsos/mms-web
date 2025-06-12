@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en" class="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../style/app.css" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+        <script type="module" src="js/index.js" defer></script>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+        />
+        <title>MMS Web - Sorting</title>
+    </head>
+
+    <body class="min-h-screen text-white p-6 my-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold">Sorting Algorithm Visualizer</h1>
+            </div>
+
+            <div class="flex gap-6 mb-3 flex-wrap">
+                <div
+                    class="border px-4 py-2 rounded-lg font-semibold bg-background/80 backdrop-blur-2xl"
+                >
+                    Swaps:
+                    <span class="font-medium text-muted-foreground" id="swaps"
+                        >0</span
+                    >
+                </div>
+                <div
+                    class="border px-4 py-2 rounded-lg font-semibold bg-background/80 backdrop-blur-2xl"
+                >
+                    Comparisons:
+                    <span
+                        class="fontt-medium text-muted-foreground"
+                        id="comparisons"
+                        >0</span
+                    >
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2">
+                    <div
+                        class="bg-background/80 backdrop-blur-2xl border rounded-xl p-6 shadow-2xl"
+                    >
+                        <div
+                            class="flex justify-between items-center mb-6 pb-4 border-b"
+                        >
+                            <h2 class="text-xl font-semibold">Visualization</h2>
+                            <div class="flex gap-2">
+                                <button
+                                    class="btn btn-icon"
+                                    id="pauseToggleButton"
+                                >
+                                    <i
+                                        id="pauseToggleIcon"
+                                        class="ph-fill ph-pause text-lg"
+                                    ></i>
+                                </button>
+                                <button class="btn btn-icon" id="stopButton">
+                                    <i class="ph-fill ph-stop text-lg"></i>
+                                </button>
+                                <button class="btn btn-icon" id="resetButton">
+                                    <i
+                                        class="ph-fill ph-arrow-counter-clockwise text-lg"
+                                    ></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="h-80 rounded-lg p-4 mb-6 flex items-end gap-0.5 overflow-hidden border"
+                            id="bars"
+                        ></div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="space-y-2">
+                                <div
+                                    class="flex justify-between text-sm font-medium"
+                                >
+                                    <span>Array Size</span>
+                                    <span id="arraySizeValue">20</span>
+                                </div>
+                                <input
+                                    class="slider w-full h-2 rounded-lg outline-none"
+                                    id="arraySize"
+                                    type="range"
+                                    min="4"
+                                    max="64"
+                                    value="20"
+                                />
+                            </div>
+                            <div class="space-y-2">
+                                <div
+                                    class="flex justify-between text-sm font-medium"
+                                >
+                                    <span>Speed</span>
+                                    <span id="speedValue">50</span>
+                                </div>
+                                <input
+                                    class="slider w-full h-2 rounded-lg outline-none"
+                                    id="speedControl"
+                                    type="range"
+                                    min="1"
+                                    max="100"
+                                    value="50"
+                                />
+                            </div>
+                        </div>
+
+                        <div
+                            class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6"
+                            id="algorithmButtons"
+                        ></div>
+
+                        <div class="border-t my-6"></div>
+
+                        <button
+                            class="btn w-full flex gap-2 font-bold text-white bg-blue-500"
+                            id="runBenchmark"
+                        >
+                            <i class="ph-fill ph-chart-bar text-lg"></i>
+                            Run Benchmark
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div
+                        class="backdrop-blur-sm border rounded-xl p-6 shadow-2xl"
+                    >
+                        <h3 class="text-lg font-semibold mb-4">
+                            Algorithm Info
+                        </h3>
+                        <div class="space-y-4 text-sm">
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">
+                                    Bubble Sort
+                                </h4>
+                                <p class="mb-1">Time: O(n²) | Space: O(1)</p>
+                                <p class="text-xs text-muted-foreground">
+                                    Repeatedly swaps adjacent elements if they
+                                    are in the wrong order
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">
+                                    Selection Sort
+                                </h4>
+                                <p class="mb-1">Time: O(n²) | Space: O(1)</p>
+                                <p class="text-xs text-muted-foreground">
+                                    Finds minimum element and places it at the
+                                    beginning
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">
+                                    Insertion Sort
+                                </h4>
+                                <p class="mb-1">Time: O(n²) | Space: O(1)</p>
+                                <p class="text-xs text-muted-foreground">
+                                    Builds sorted array one element at a time
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">
+                                    Merge Sort
+                                </h4>
+                                <p class="mb-1">
+                                    Time: O(n log n) | Space: O(n)
+                                </p>
+                                <p class="text-xs text-muted-foreground">
+                                    Divides array, sorts, and merges back
+                                    together
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">
+                                    Quick Sort
+                                </h4>
+                                <p class="mb-1">
+                                    Time: O(n log n) | Space: O(log n)
+                                </p>
+                                <p class="text-xs text-muted-foreground">
+                                    Picks a pivot and partitions array around it
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <div
+                    class="border rounded-xl p-6 shadow-2xl flex flex-col items-center"
+                >
+                    <h3 class="text-lg font-semibold mb-4 w-full">
+                        Benchmark Results
+                    </h3>
+
+                    <canvas class="min-h-[30rem]" id="benchmarkChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,10 +1,33 @@
-<!doctype html>
-<html lang="en" class="dark">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../style/app.css" />
-        <title>MMS Web</title>
-    </head>
-    <body></body>
+<!DOCTYPE html>
+<html lang="en" class="dark"> <!-- The page is in dark mode -->
+<head>
+    <meta charset="UTF-8" />
+    <title>Black Page</title>
+    <link rel="stylesheet" href="../style/app.css" /> <!-- External CSS file -->
+</head>
+<body class="bg-background text-foreground h-screen overflow-hidden">
+<!-- Fullscreen black page with no scrollbars -->
+
+<div>
+    <div class="relative w-full h-full relative">
+        <!-- Container that takes full screen size -->
+
+        <canvas id="three-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+        <!-- This canvas is where the 3D scene will be rendered -->
+    </div>
+
+    <!-- text segment -->
+    <div class="relative pointer-events-none">
+        <div class="flex left m-auto"></div>
+        <div class="flex right items-center justify-end h-screen mr-20">
+            <div class="main bg-white/10 backdrop-blur-md text-white p-6 rounded-xl shadow-lg max-w-sm">
+                <h1 class="text-foreground text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white mb-5">3D Modell</h1>
+                <p class="text-foreground font-normal text-gray-500 lg:text-xl dark:text-gray-400">Modelliert in Blender, visualisiert mit Three.js</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="3dScript.js"></script> <!-- Load the 3D script -->
+</body>
 </html>
