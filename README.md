@@ -4,8 +4,8 @@
 
 # How to start:
 
-open terminal in project folder
+- open terminal in project folder
 
-install nodes via `npm i`
+- install nodes via `npm i`
 
-run project via `npm run dev`
+- run project via `npm run dev`
