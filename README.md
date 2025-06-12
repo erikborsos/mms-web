@@ -1,10 +1,6 @@
 # Requierements:
 
-Node.js installed
-
-## Voraussetzungen
-
-- [Node.js](https://nodejs.org/) muss installiert sein (empfohlen: LTS-Version)
+- [Node.js](https://nodejs.org/) installed
 
 # How to start:
 
