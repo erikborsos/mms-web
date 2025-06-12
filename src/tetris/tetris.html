@@ -7,61 +7,63 @@
         <title>MMS Web</title>
     </head>
     <body>
-    <header class="navbar">
+    <!-- Navigation -->
+    <header class="navbar" role="navigation" aria-label="Main Navigation">
         <ul class="navbar-list">
+
+            <!-- Home -->
             <li class="navbar-item group">
                 <a href="../index.html" class="flex flex-col items-center group">
-                    <img src="https://img.icons8.com/?size=100&id=86527&format=png&color=FFFFFF" alt="Home" class="icon-dark" />
-                    <img src="https://img.icons8.com/?size=100&id=86527&format=png&color=1A1A1A" alt="Home" class="icon-light" />
+                    <img src="https://img.icons8.com/?size=100&id=86527&format=png&color=000000" alt="Home" class="theme-icon" />
                     <span class="navbar-text">Home</span>
                     <span class="navbar-underline"></span>
                 </a>
             </li>
             <li class="navbar-divider"></li>
 
+            <!-- Sortierung -->
             <li class="navbar-item group">
                 <a href="../sorting/sorting.html" class="flex flex-col items-center group">
-                    <img src="https://img.icons8.com/?size=100&id=21890&format=png&color=FFFFFF" alt="Sortierung" class="icon-dark" />
-                    <img src="https://img.icons8.com/?size=100&id=21890&format=png&color=1A1A1A" alt="Sortierung" class="icon-light" />
+                    <img src="https://img.icons8.com/?size=100&id=21890&format=png&color=000000" alt="Sortierung" class="theme-icon" />
                     <span class="navbar-text">Sortierung</span>
                     <span class="navbar-underline"></span>
                 </a>
             </li>
             <li class="navbar-divider"></li>
 
+            <!-- Tetris -->
             <li class="navbar-item group">
                 <a href="../tetris/tetris.html" class="flex flex-col items-center group">
-                    <img src="https://img.icons8.com/?size=100&id=47421&format=png&color=FFFFFF" alt="Tetris" class="icon-dark" />
-                    <img src="https://img.icons8.com/?size=100&id=47421&format=png&color=1A1A1A" alt="Tetris" class="icon-light" />
+                    <img src="https://img.icons8.com/?size=100&id=47421&format=png&color=000000" alt="Tetris" class="theme-icon" />
                     <span class="navbar-text">Tetris</span>
                     <span class="navbar-underline"></span>
                 </a>
             </li>
             <li class="navbar-divider"></li>
 
+            <!-- 3D -->
             <li class="navbar-item group">
                 <a href="../3d/3d.html" class="flex flex-col items-center group">
-                    <img src="https://img.icons8.com/?size=100&id=iUDJxrHYhzTG&format=png&color=FFFFFF" alt="3D" class="icon-dark" />
-                    <img src="https://img.icons8.com/?size=100&id=iUDJxrHYhzTG&format=png&color=1A1A1A" alt="3D" class="icon-light" />
+                    <img src="https://img.icons8.com/?size=100&id=iUDJxrHYhzTG&format=png&color=000000" alt="3D" class="theme-icon" />
                     <span class="navbar-text">3D</span>
                     <span class="navbar-underline"></span>
                 </a>
             </li>
             <li class="navbar-divider"></li>
 
+            <!-- Video -->
             <li class="navbar-item group">
                 <a href="../media/media.html" class="flex flex-col items-center group">
-                    <img src="https://img.icons8.com/?size=100&id=111366&format=png&color=FFFFFF" alt="Video" class="icon-dark" />
-                    <img src="https://img.icons8.com/?size=100&id=111366&format=png&color=1A1A1A" alt="Video" class="icon-light" />
+                    <img src="https://img.icons8.com/?size=100&id=111366&format=png&color=000000" alt="Video" class="theme-icon" />
                     <span class="navbar-text">Video</span>
                     <span class="navbar-underline"></span>
                 </a>
             </li>
         </ul>
 
-        <button id="darkToggle" type="button" class="navbar-toggle transition-transform duration-300 hover:scale-110">
-            <img src="https://img.icons8.com/?size=100&id=59841&format=png&color=FFFFFF" class="icon-dark" alt="Dark Icon" />
-            <img src="https://img.icons8.com/?size=100&id=648&format=png&color=1A1A1A" class="icon-light" alt="Light Icon" />
+        <!-- Dark Mode Toggle Button -->
+        <button id="darkToggle" type="button" class="navbar-toggle transition-transform duration-300 hover:scale-110" aria-label="Toggle dark mode">
+            <img src="https://img.icons8.com/?size=100&id=59841&format=png&color=000000" class="theme-icon" alt="Toggle Theme" />
         </button>
     </header>
     <script type="module" src="../darkMode.js"></script>
