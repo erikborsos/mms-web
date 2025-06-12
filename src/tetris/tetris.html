@@ -201,6 +201,29 @@
         .game-over-content button {
             margin-top: 20px;
         }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .play-pause-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: #4CAF50;
+        }
+        
+        .play-pause-btn:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -216,11 +239,18 @@
 
     <div class="sound-controls">
         <h3>Soundtrack</h3>
-        <select id="soundtrack-select">
-            <option value="tetris_1.wav">Tetris Theme 1</option>
-            <option value="tetris_2.wav">Tetris Theme 2</option>
-        </select>
-        <div>
+
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <select id="soundtrack-select">
+                <option value="tetris_1.wav">Tetris Theme 1</option>
+                <option value="tetris_2.wav">Tetris Theme 2</option>
+                <option value="tetris_3.wav">Tetris Theme 2</option>
+            </select>
+            <div class="play-pause-btn" id="play-pause-btn">
+                <span id="play-pause-icon">▶</span>
+            </div>
+        </div>
+        <div class="audio-controls">
             <label>
                 <input type="checkbox" id="playlist-checkbox" checked>
                 Playlist abspielen
@@ -281,12 +311,18 @@
         let currentTrackIndex = 0;
         const soundtracks = [
             { name: 'Tetris Theme 1', file: 'tetris_1.wav' },
-            { name: 'Tetris Theme 2', file: 'tetris_2.wav' }
+            { name: 'Tetris Theme 2', file: 'tetris_2.wav' },
+            { name: 'Tetris Theme 3', file: 'tetris_3.wav' }
+
         ];
         const soundtrackSelect = document.getElementById('soundtrack-select');
         const playlistCheckbox = document.getElementById('playlist-checkbox');
         const volumeSlider = document.getElementById('volume-slider');
-        
+
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playPauseIcon = document.getElementById('play-pause-icon');
+        let isMusicPlaying = false;
+
         
         // Initialisierung der Soundtrack-Auswahl
         function initSoundtrackSelect() {
@@ -300,14 +336,16 @@
             });
         }
         
-        // Track wechseln (ohne automatisches Abspielen)
+
+        // Track wechseln
         function changeTrack(index) {
             currentTrackIndex = index;
             const track = soundtracks[index];
             audioPlayer.src = track.file;
-            soundtrackSelect.selectedIndex = index;
             audioPlayer.loop = !playlistCheckbox.checked;
-            if (!isPaused) {
+            soundtrackSelect.selectedIndex = index;
+            
+            if (isMusicPlaying) {
                 playAudio();
             }
         }
@@ -318,19 +356,37 @@
             
             currentTrackIndex = (currentTrackIndex + 1) % soundtracks.length;
             changeTrack(currentTrackIndex);
-            
-            playAudio();
 
+            soundtrackSelect.selectedIndex = currentTrackIndex;
         }
         
-        // Audio abspielen (mit Nutzerinteraktion)
+        // Audio abspielen
         function playAudio() {
-            if (!isPaused) {
-                audioPlayer.play().catch(e => console.error('Audio konnte nicht abgespielt werden:', e));
+            audioPlayer.play()
+                .then(() => {
+                    isMusicPlaying = true;
+                    playPauseIcon.textContent = '⏸';
+                })
+                .catch(e => console.error('Audio konnte nicht abgespielt werden:', e));
+        }
+        
+        // Audio pausieren
+        function pauseAudio() {
+            audioPlayer.pause();
+            isMusicPlaying = false;
+            playPauseIcon.textContent = '▶';
+        }
+        
+        // Audio Play/Pause umschalten
+        function toggleAudio() {
+            if (isMusicPlaying) {
+                pauseAudio();
+            } else {
+                playAudio();
             }
         }
         
-        // Event Listener
+        // Event Listener für Audio-Steuerung
         playlistCheckbox.addEventListener('change', () => {
             audioPlayer.loop = !playlistCheckbox.checked;
         });
@@ -344,12 +400,16 @@
             changeTrack(selectedIndex);
         });
         
+
+        playPauseBtn.addEventListener('click', toggleAudio);
+
         audioPlayer.addEventListener('ended', () => {
             if (playlistCheckbox.checked) {
                 playNextTrack();
             } else if (audioPlayer.loop) {
                 audioPlayer.currentTime = 0;
-                if (!isPaused) {
+
+                if (isMusicPlaying) {
                     playAudio();
                 }
             }
@@ -378,7 +438,7 @@
         // Tetromino-Formen
         const SHAPES = [
             null,
-            [[0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]], // I
+            [[0, 1, 0, 0], [0, 1, 0, 0], [0, 1, 0, 0], [0, 1, 0, 0]], // I
             [[2, 0, 0], [2, 2, 2], [0, 0, 0]],                          // J
             [[0, 0, 3], [3, 3, 3], [0, 0, 0]],                          // L
             [[0, 4, 4], [0, 4, 4], [0, 0, 0]],                          // O
@@ -387,7 +447,7 @@
             [[0, 7, 0], [7, 7, 7], [0, 0, 0]]                           // T
         ];
 
-        
+
 
         // Spielbrett-Klasse
         class Board {
@@ -549,10 +609,11 @@
             gameOver = false;
             currentPiece = null;
             nextPiece = null;
-            isPaused = false;
+
+            isPaused = true;
             startButton.textContent = 'Start';
             gameOverOverlay.style.display = 'none';
-            audioPlayer.pause();
+
         }
 
         function showGameOver() {
@@ -563,39 +624,32 @@
         }
 
         function startGame() {
-    if (gameOver) {
-        resetGame();
-        spawnPiece();
-        isPaused = false;
-        startButton.textContent = 'Pause';
-        playAudio();
-        dropInterval = setInterval(dropPiece, dropSpeed);
-        return;
-    }
-    
-    // Geänderte Bedingung - entfernt die Pause-Überprüfung
-    if (!currentPiece) {
-        spawnPiece();
-        isPaused = false;
-        startButton.textContent = 'Pause';
-        playAudio();
-        dropInterval = setInterval(dropPiece, dropSpeed);
-        return;
-    }
-    
-    isPaused = !isPaused;
-    startButton.textContent = isPaused ? 'Fortsetzen' : 'Pause';
-    
-    if (isPaused) {
-        clearInterval(dropInterval);
-        audioPlayer.pause();
-    } else {
-        playAudio();
-        dropInterval = setInterval(dropPiece, dropSpeed);
-    }
-}
-
-
+            if (gameOver) {
+                resetGame();
+                spawnPiece();
+                isPaused = false;
+                startButton.textContent = 'Pause';
+                dropInterval = setInterval(dropPiece, dropSpeed);
+                return;
+            }
+            
+            if (!currentPiece) {
+                spawnPiece();
+                isPaused = false;
+                startButton.textContent = 'Pause';
+                dropInterval = setInterval(dropPiece, dropSpeed);
+                return;
+            }
+            
+            isPaused = !isPaused;
+            startButton.textContent = isPaused ? 'Fortsetzen' : 'Pause';
+            
+            if (isPaused) {
+                clearInterval(dropInterval);
+            } else {
+                dropInterval = setInterval(dropPiece, dropSpeed);
+            }
+        }
 
         function spawnPiece() {
             if (!nextPiece) {
@@ -611,7 +665,7 @@
             if (!board.isValidMove(currentPiece, 0, 0)) {
                 gameOver = true;
                 clearInterval(dropInterval);
-                audioPlayer.pause();
+
                 startButton.textContent = 'Neustarten';
                 showGameOver();
             }
@@ -758,3 +812,4 @@
     </script>
 </body>
 </html>
+
