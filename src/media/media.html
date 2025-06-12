@@ -13,30 +13,64 @@
 
     <div class="flex flex-col items-center space-y-4">
         <h2>Bild</h2>
-        <div class="flex flex-col items-center mb-16">
-            <div class="controls m-2 flex space-x-2">
-                <input type="file" class="btn" id="imageUpload" accept="image/*"/>
-                <button class="btn" onclick="applyGrayscaleFilter()">Grayscale</button>
-                <button class="btn" onclick="callThresholdFilter()">Threshold</button>
-                <button class="btn" onclick="applyInvertFilter()">Invert</button>
-                <button class="btn" onclick="applySepiaFilter()">Sepia</button>
-                <button class="btn" onclick="callSubsamplingFilter()">Subsampling</button>
-                <button class="btn" onclick="resetImage()">Reset</button>
+        <div class="flex flex-col space-y-2 items-center mb-64">
+            <div class="mb-4">
+                <label for="modeSelect" class="mr-2 font-semibold">Mode:</label>
+                <select id="modeSelect" class="border rounded p-1">
+                    <option class="bg-neutral-950" value="filter">Filter Mode</option>
+                    <option class="bg-neutral-950" value="draw">Draw Mode</option>
+                </select>
             </div>
+            <input type="file" class="btn" id="imageUpload" accept="image/*"/>
+            <div class="flex flex-row items-center">
+                <div class="controls m-2 flex flex-col space-y-2">
+                    <button class="btn" onclick="applyGrayscaleFilter()">Grayscale</button>
+                    <button class="btn" onclick="callThresholdFilter()">Threshold</button>
+                    <button class="btn" onclick="applySepiaFilter()">Sepia</button>
+                    <button class="btn" onclick="callSubsamplingFilter()">Subsampling</button>
+                    <button class="btn" onclick="applyInvertFilter()">Invert</button>
+                    <button class="btn" onclick="applyBoxBlur()">Blur</button>
+                    <button class="btn" onclick="applyVignette()">Vignette</button>
+                </div>
 
-            <div id="thresholdSliderContainer" class="flex-col space-x-2 m-2 hidden">
-                <label for="thresholdSlider">Threshold: <span id="thresholdValue">128</span></label>
-                <input type="range" id="thresholdSlider" min="0" max="255" value="128" class="w-32">
-            </div>
-            <div id="subsamplingSliderContainer" class="flex-col space-x-2 m-2 hidden">
-                <label for="thresholdSlider">Sampling Rate: <span id="subsamplingValue">4</span></label>
-                <input type="range" id="subsamplingSlider" min="1" max="8" value="4" class="w-32">
-            </div>
+                <canvas id="canvasImage" class="flex justify-center-safe"></canvas>
 
-            <canvas id="canvasImage"></canvas>
+                <div class="flex flex-col">
+                    <div id="thresholdSliderContainer" class="flex-col space-x-2 ml-2 hidden">
+                        <label for="thresholdSlider">Threshold: <span id="thresholdValue">128</span></label>
+                        <input type="range" id="thresholdSlider" min="0" max="255" value="128" class="w-32">
+                    </div>
+                    <div id="subsamplingSliderContainer" class="flex-col space-x-2 ml-2 hidden">
+                        <label for="subsamplingSlider">Sampling Rate: <span id="subsamplingValue">4</span></label>
+                        <input type="range" id="subsamplingSlider" min="1" max="8" value="4" class="w-32">
+                    </div>
+                    <div id="drawControls" class="flex flex-col items-center space-y-4 ml-2 hidden">
+                        <div>
+                            <label for="drawColor" class="block text-sm font-medium">Color</label>
+                            <input type="color" id="drawColor" value="#000000" class="w-10 h-10 p-0 border rounded">
+                        </div>
+                        <div>
+                            <label for="lineWidth" class="block text-sm font-medium">Line Width: <span id="lineWidthValue">5</span></label>
+                            <input type="range" id="lineWidth" min="1" max="50" value="5" class="w-32">
+                        </div>
+                    </div>
+                    <div class="w-32 ml-2"></div>
+                </div>
+            </div>
+            <div class="flex flex-row space-x-2">
+                <button id="resetBtn" class="btn" onclick="resetImage()"><i class="fas fa-arrow-rotate-back mr-2"></i>Reset</button>
+                <button id="saveImage" class="btn"><i class="fas fa-floppy-disk mr-2"></i>Save Image</button>
+            </div>
         </div>
         <h2>Audio</h2>
-        <div class="flex flex-col space-y-4 items-center mb-16">
+        <div class="flex flex-col space-y-4 items-center mb-64">
+            <div class="mb-4">
+                <label for="visualizerSelect" class="mr-2 font-semibold">Form:</label>
+                <select id="visualizerSelect" class="border rounded p-1">
+                    <option class="bg-neutral-950" value="frequency">Frequency bars</option>
+                    <option class="bg-neutral-950" value="wave">Waveform</option>
+                </select>
+            </div>
             <div class="flex space-x-2 items-center">
                 <input class="btn" type="file" id="audioUpload" accept="audio/*"/>
                 <button class="btn px-3" onclick="randomizeColors()"><i class="fas fa-dice"></i></button>
@@ -45,7 +79,7 @@
             <audio id="audio" controls></audio>
         </div>
         <h2>Video</h2>
-        <div class="flex flex-col space-y-2 items-center mb-16">
+        <div class="flex flex-col space-y-2 items-center mb-64">
             <video id="video" src="NeverGonnaGiveYouUp.mp4" width="960" class="max-w-none mb-0"></video>
             <div class="w-full px-2 bg-black pb-2">
                 <input type="range" id="seekBar" value="0" min="0" step="0.01" class="w-full accent-accent" />

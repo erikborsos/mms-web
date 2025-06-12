@@ -14,25 +14,68 @@ const subsamplingSliderContainer = document.getElementById('subsamplingSliderCon
 let subsamplingRate = 4;
 let subsamplingActive = false;
 
-thresholdSlider.addEventListener('input', () => {
-    currentThreshold = parseInt(thresholdSlider.value);
-    thresholdValue.textContent = currentThreshold;
+let drawMode = false;
+let isDrawing = false;
 
-    if (originalImageData && thresholdActive) {
-        applyThresholdFilter();
+const drawControls = document.getElementById("drawControls");
+const drawColor = document.getElementById("drawColor");
+const lineWidthSlider = document.getElementById("lineWidth");
+const lineWidthValue = document.getElementById("lineWidthValue");
+
+// Initial style
+ctx.strokeStyle = drawColor.value;
+ctx.lineWidth = lineWidthSlider.value;
+
+// change between draw and filter mode
+document.getElementById("modeSelect").addEventListener("change", (e) => {
+    resetImage();
+    drawMode = e.target.value === "draw";
+
+    // Show/hide drawing controls
+    drawControls.classList.toggle("hidden", !drawMode);
+
+    // disable filter buttons when in draw mode
+    document.querySelectorAll(".controls button").forEach(btn => {
+        if (btn.id !== "resetBtn") btn.disabled = drawMode;
+    });
+
+    canvas.style.cursor = drawMode ? "crosshair" : "default";
+});
+
+// start drawing on mousedown
+canvas.addEventListener("mousedown", (e) => {
+    if (!drawMode) return;
+    isDrawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+});
+
+// keep drawing while mouse is moving
+canvas.addEventListener("mousemove", (e) => {
+    if (!drawMode) return;
+    if (isDrawing) {
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
     }
 });
 
-subsamplingSlider.addEventListener('input', () => {
-    subsamplingRate = parseInt(subsamplingSlider.value);
-    subsamplingValue.textContent = subsamplingRate;
+// stop drawing on mouseup
+canvas.addEventListener("mouseup", () => {
+    if (drawMode) isDrawing = false;
+});
 
-    if (originalImageData && subsamplingActive) {
-        applySubsamplingFilter();
-    }
+// Update line width label
+lineWidthSlider.addEventListener("input", () => {
+    lineWidthValue.textContent = lineWidthSlider.value;
+    ctx.lineWidth = lineWidthSlider.value;
+});
 
-})
+// Update color
+drawColor.addEventListener("input", () => {
+    ctx.strokeStyle = drawColor.value;
+});
 
+// load initial image
 window.addEventListener("load", () => {
     const img = new Image();
     img.onload = function() {
@@ -44,6 +87,7 @@ window.addEventListener("load", () => {
     img.src = "./squirrel.jpg";
 });
 
+// upload image from a device
 document.getElementById("imageUpload").oninput = async (evt) => {
     thresholdActive = false;
     try {
@@ -58,6 +102,36 @@ document.getElementById("imageUpload").oninput = async (evt) => {
         console.error(err);
     }
 };
+
+// slider for threshold value
+thresholdSlider.addEventListener('input', () => {
+    currentThreshold = parseInt(thresholdSlider.value);
+    thresholdValue.textContent = currentThreshold;
+
+    if (originalImageData && thresholdActive) {
+        applyThresholdFilter();
+    }
+});
+
+// slider for subsampling rate
+subsamplingSlider.addEventListener('input', () => {
+    subsamplingRate = parseInt(subsamplingSlider.value);
+    subsamplingValue.textContent = subsamplingRate;
+
+    if (originalImageData && subsamplingActive) {
+        applySubsamplingFilter();
+    }
+
+});
+
+// save current canvas as image
+document.getElementById("saveImage").addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.download = "canvas-image.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+});
+
 
 function applyGrayscaleFilter() {
     resetImage();
@@ -94,20 +168,6 @@ function applyThresholdFilter() {
         const avg = (data[i] + data[i+1] + data[i+2]) / 3;
         const newValue = avg < threshold ? 0 : 255;
         data[i] = data[i+1] = data[i+2] = newValue;
-    }
-
-    ctx.putImageData(imageData, 0, 0);
-}
-
-function applyInvertFilter() {
-    resetImage();
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-    for (let i = 0; i < data.length; i+=4) {
-        data[i] = 255 - data[i];
-        data[i+1] = 255 - data[i+1];
-        data[i+2] = 255 - data[i+2];
     }
 
     ctx.putImageData(imageData, 0, 0);
@@ -170,8 +230,90 @@ function applySubsamplingFilter() {
     ctx.putImageData(imageData, 0, 0);
 }
 
+function applyInvertFilter() {
+    resetImage();
+
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    for (let i = 0; i < data.length; i+=4) {
+        data[i] = 255 - data[i];
+        data[i+1] = 255 - data[i+1];
+        data[i+2] = 255 - data[i+2];
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+}
+
+function applyBoxBlur() {
+    resetImage();
+
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const imageData = ctx.getImageData(0, 0, width, height);
+    const data = imageData.data;
+    const originalData = data;
+
+    const kernel = [
+        [1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]
+    ];
+    const kernelSize = 3;
+    const kernelWeight = 9;
+
+    for (let y = 1; y < height - 1; y++) {
+        for (let x = 1; x < width - 1; x++) {
+            let r = 0, g = 0, b = 0;
+
+            for (let ky = 0; ky < kernelSize; ky++) {
+                for (let kx = 0; kx < kernelSize; kx++) {
+                    const px = x + kx - 1;
+                    const py = y + ky - 1;
+                    const offset = (py * width + px) * 4;
+
+                    r += data[offset] * kernel[ky][kx];
+                    g += data[offset + 1] * kernel[ky][kx];
+                    b += data[offset + 2] * kernel[ky][kx];
+                }
+            }
+
+            const idx = (y * width + x) * 4;
+            originalData[idx] = r / kernelWeight;
+            originalData[idx + 1] = g / kernelWeight;
+            originalData[idx + 2] = b / kernelWeight;
+        }
+    }
+
+    const blurred = new ImageData(originalData, width, height);
+    ctx.putImageData(blurred, 0, 0);
+}
+
+function applyVignette() {
+    resetImage();
+
+    const width = canvas.width;
+    const height = canvas.height;
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const maxRadius = Math.sqrt(centerX * centerX + centerY * centerY);
+
+    const gradient = ctx.createRadialGradient(
+        centerX, centerY, 0,
+        centerX, centerY, maxRadius
+    );
+
+    gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0)');
+    gradient.addColorStop(1, 'rgba(0, 0, 0, 0.8)');
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+}
+
 function resetImage() {
     ctx.putImageData(originalImageData, 0, 0);
+
+    // hide threshold and subsampling sliders
     thresholdActive = false;
     thresholdSliderContainer.classList.remove('flex');
     thresholdSliderContainer.classList.add('hidden');
