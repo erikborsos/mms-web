@@ -84,7 +84,7 @@ window.addEventListener("load", () => {
         ctx.drawImage(this, 0, 0);
         originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     };
-    img.src = "./squirrel.jpg";
+    img.src = "./assets/img/squirrel.jpg";
 });
 
 // upload image from a device

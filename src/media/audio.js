@@ -10,7 +10,7 @@ let audioCtx, analyser, source;
 let currentVisualizer = 'frequency';
 
 window.addEventListener("load", () => {
-    audio.src = "./01Bad.mp3";
+    audio.src = "./assets/audio/01Bad.mp3";
     initAudio();
 });
 
