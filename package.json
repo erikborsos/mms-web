@@ -11,10 +11,24 @@
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.6",
+    "tailwindcss": "^4.1.7",
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.6"
-  }
+    "@tailwindcss/vite": "^4.1.7",
+    "three": "^0.176.0"
+  },
+  "description": "Test",
+  "main": "vite.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikborsos/mms-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erikborsos/mms-web/issues"
+  },
+  "homepage": "https://github.com/erikborsos/mms-web#readme"
 }
