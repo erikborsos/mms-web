@@ -1,4 +1,4 @@
-import { sizeSlider, barsContainer, speedSlider } from "./dom-elements.js";
+import {sizeSlider, barsContainer, speedSlider, sizeLabel} from "./dom-elements.js";
 import { setPauseResolve, setValues, values, isPaused, shouldStop } from ".";
 
 export function generateBars(vals) {
@@ -23,7 +23,7 @@ export function generateBars(vals) {
     const bar = document.createElement("div");
     bar.style.height = `${values[i]}%`;
     bar.style.width = `${barWidth}%`;
-    bar.className = "bg-white flex-1 rounded-t-lg";
+    bar.className = "bg-black dark:bg-white flex-1 rounded-t-lg";
     barsContainer.appendChild(bar);
   }
 }

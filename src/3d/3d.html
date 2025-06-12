@@ -8,8 +8,69 @@
 <body class="bg-background text-foreground h-screen overflow-hidden">
 <!-- Fullscreen black page with no scrollbars -->
 
-<div>
-    <div class="relative w-full h-full relative">
+<div class="w-full min-h-screen">
+    <!-- Navigation -->
+    <header class="navbar" role="navigation" aria-label="Main Navigation">
+        <ul class="navbar-list">
+
+            <!-- Home -->
+            <li class="navbar-item group">
+                <a href="/index.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=86527&format=png&color=000000" alt="Home" class="theme-icon" />
+                    <span class="navbar-text">Home</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+            <li class="navbar-divider"></li>
+
+            <!-- Sortierung -->
+            <li class="navbar-item group">
+                <a href="/sorting/sorting.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=21890&format=png&color=000000" alt="Sortierung" class="theme-icon" />
+                    <span class="navbar-text">Sortierung</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+            <li class="navbar-divider"></li>
+
+            <!-- Tetris -->
+            <li class="navbar-item group">
+                <a href="/tetris/tetris.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=47421&format=png&color=000000" alt="Tetris" class="theme-icon" />
+                    <span class="navbar-text">Tetris</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+            <li class="navbar-divider"></li>
+
+            <!-- 3D -->
+            <li class="navbar-item group">
+                <a href="/3d/3d.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=iUDJxrHYhzTG&format=png&color=000000" alt="3D" class="theme-icon" />
+                    <span class="navbar-text">3D</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+            <li class="navbar-divider"></li>
+
+            <!-- Video -->
+            <li class="navbar-item group">
+                <a href="/media/media.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=111366&format=png&color=000000" alt="Mediengallerie" class="theme-icon" />
+                    <span class="navbar-text">Mediengallerie</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Dark Mode Toggle Button -->
+        <button id="darkToggle" type="button" class="navbar-toggle transition-transform duration-300 hover:scale-110">
+            <img src="https://img.icons8.com/?size=100&id=59841&format=png&color=FFFFFF" class="icon-dark" alt="Dark Icon" />
+            <img src="https://img.icons8.com/?size=100&id=648&format=png&color=1A1A1A" class="icon-light" alt="Light Icon" />
+        </button>
+    </header>
+    <div class="">
+    <div class="relative w-full h-full">
         <!-- Container that takes full screen size -->
 
         <canvas id="three-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
@@ -27,7 +88,8 @@
         </div>
     </div>
 </div>
-
+</div>
+<script type="module" src="../darkMode.js"></script>
 <script type="module" src="3dScript.js"></script> <!-- Load the 3D script -->
 </body>
 </html>

@@ -19,7 +19,69 @@
         <title>MMS Web - Sorting</title>
     </head>
 
-    <body class="min-h-screen text-white p-6 my-8">
+    <body class="min-h-screen text-foreground">
+
+    <!-- Navigation -->
+    <header class="navbar" role="navigation" aria-label="Main Navigation">
+        <ul class="navbar-list">
+
+            <!-- Home -->
+            <li class="navbar-item group">
+                <a href="/index.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=86527&format=png&color=000000" alt="Home" class="theme-icon" />
+                    <span class="navbar-text">Home</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+            <li class="navbar-divider"></li>
+
+            <!-- Sortierung -->
+            <li class="navbar-item group">
+                <a href="/sorting/sorting.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=21890&format=png&color=000000" alt="Sortierung" class="theme-icon" />
+                    <span class="navbar-text">Sortierung</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+            <li class="navbar-divider"></li>
+
+            <!-- Tetris -->
+            <li class="navbar-item group">
+                <a href="/tetris/tetris.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=47421&format=png&color=000000" alt="Tetris" class="theme-icon" />
+                    <span class="navbar-text">Tetris</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+            <li class="navbar-divider"></li>
+
+            <!-- 3D -->
+            <li class="navbar-item group">
+                <a href="/3d/3d.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=iUDJxrHYhzTG&format=png&color=000000" alt="3D" class="theme-icon" />
+                    <span class="navbar-text">3D</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+            <li class="navbar-divider"></li>
+
+            <!-- Video -->
+            <li class="navbar-item group">
+                <a href="/media/media.html" class="flex flex-col items-center group">
+                    <img src="https://img.icons8.com/?size=100&id=111366&format=png&color=000000" alt="Mediengallerie" class="theme-icon" />
+                    <span class="navbar-text">Mediengallerie</span>
+                    <span class="navbar-underline"></span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Dark Mode Toggle Button -->
+        <button id="darkToggle" type="button" class="navbar-toggle transition-transform duration-300 hover:scale-110">
+            <img src="https://img.icons8.com/?size=100&id=59841&format=png&color=FFFFFF" class="icon-dark" alt="Dark Icon" />
+            <img src="https://img.icons8.com/?size=100&id=648&format=png&color=1A1A1A" class="icon-light" alt="Light Icon" />
+        </button>
+    </header>
+    <div class="p-6 my-8">
         <div class="max-w-7xl mx-auto">
             <div class="text-center">
                 <h1 class="text-5xl font-bold">Sorting Algorithm Visualizer</h1>
@@ -124,7 +186,7 @@
                         <div class="border-t my-6"></div>
 
                         <button
-                            class="btn w-full flex gap-2 font-bold text-white bg-blue-500"
+                            class="btn w-full flex gap-2 font-bold text-foreground bg-blue-500 text-white"
                             id="runBenchmark"
                         >
                             <i class="ph-fill ph-chart-bar text-lg"></i>
@@ -142,7 +204,7 @@
                         </h3>
                         <div class="space-y-4 text-sm">
                             <div>
-                                <h4 class="font-semibold text-white mb-1">
+                                <h4 class="font-semibold text-foreground mb-1">
                                     Bubble Sort
                                 </h4>
                                 <p class="mb-1">Time: O(n²) | Space: O(1)</p>
@@ -152,7 +214,7 @@
                                 </p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white mb-1">
+                                <h4 class="font-semibold text-foreground mb-1">
                                     Selection Sort
                                 </h4>
                                 <p class="mb-1">Time: O(n²) | Space: O(1)</p>
@@ -162,7 +224,7 @@
                                 </p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white mb-1">
+                                <h4 class="font-semibold text-foreground mb-1">
                                     Insertion Sort
                                 </h4>
                                 <p class="mb-1">Time: O(n²) | Space: O(1)</p>
@@ -171,7 +233,7 @@
                                 </p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white mb-1">
+                                <h4 class="font-semibold text-foreground mb-1">
                                     Merge Sort
                                 </h4>
                                 <p class="mb-1">
@@ -183,7 +245,7 @@
                                 </p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white mb-1">
+                                <h4 class="font-semibold text-foreground mb-1">
                                     Quick Sort
                                 </h4>
                                 <p class="mb-1">
@@ -210,5 +272,8 @@
                 </div>
             </div>
         </div>
+    </div>
     </body>
+
+    <script type="module" src="../darkMode.js"></script>
 </html>

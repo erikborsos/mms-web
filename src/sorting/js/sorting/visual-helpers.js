@@ -10,7 +10,7 @@ export function changeColor(i, color) {
 export function resetBarColors() {
   const bars = barsContainer.children;
   for (let i = 0; i < bars.length; i++) {
-    bars[i].className = "bg-white flex-1 rounded-t-lg";
+    bars[i].className = "bg-black dark:bg-white flex-1 rounded-t-lg";
   }
 }
 
@@ -24,8 +24,8 @@ export async function swap(i, j) {
   changeColor(j, "bg-blue-500");
   increaseSwaps(1);
   await wait();
-  changeColor(i, "bg-white");
-  changeColor(j, "bg-white");
+  changeColor(i, "bg-black dark:bg-white");
+  changeColor(j, "bg-black dark:bg-white");
 }
 
 export async function highlight(i, j) {
@@ -33,8 +33,8 @@ export async function highlight(i, j) {
   changeColor(i, "bg-orange-500");
   changeColor(j, "bg-orange-500");
   await wait();
-  changeColor(i, "bg-white");
-  changeColor(j, "bg-white");
+  changeColor(i, "bg-black dark:bg-white");
+  changeColor(j, "bg-black dark:bg-white");
 }
 
 export function markSorted(i) {

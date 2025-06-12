@@ -36,16 +36,14 @@ let model;
 let mixer;
 
 loader.load(
-    '3d_object.gltf', // Path to your 3D model
+    '3d_object.gltf', // Path to 3D model
     function (gltf) {
-        // Once loaded, add model to scene
         model = gltf.scene;
         model.position.set(0.3, -0.5, -0.1);
         model.scale.set(0.3, 0.3, 0.3);
         model.rotation.set(0, -2.7, 0);
         scene.add(model);
 
-        // Play animations if the model has them
         if (gltf.animations && gltf.animations.length) {
             mixer = new THREE.AnimationMixer(model);
             gltf.animations.forEach((clip) => {
@@ -67,6 +65,9 @@ function isDarkMode() {
     return document.documentElement.classList.contains("dark");
 }
 
+// Array to store star meshes
+const stars = [];
+
 // Create random stars (small spheres) in the scene
 function addStar() {
     const geometry = new THREE.SphereGeometry(Math.random() + 0.5, 32, 32);
@@ -74,16 +75,34 @@ function addStar() {
     const material = new THREE.MeshStandardMaterial({ color });
     const mesh = new THREE.Mesh(geometry, material);
 
-    // Set the star at a random position in 3D space
     const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
     mesh.position.set(x, y, z);
     scene.add(mesh);
+    stars.push(mesh); // Store the star mesh
 }
 
 // Add 200 stars to the scene
 Array(200).fill().forEach(addStar);
 
-//zoom camera settings
+// Update star colors when dark mode changes
+function updateStarColors() {
+    const color = isDarkMode() ? 0xffffff : 0x000000;
+    stars.forEach((star) => {
+        star.material.color.setHex(color);
+    });
+}
+
+// Observe changes to the dark mode class
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            updateStarColors();
+        }
+    });
+});
+observer.observe(document.documentElement, { attributes: true });
+
+// Zoom camera settings
 let zoomProgress = 0;
 const initialCamPos = new THREE.Vector3(-4, 4, -6);
 const targetCamPos = new THREE.Vector3(-0.63, 0.63, -2);
@@ -102,7 +121,6 @@ function animate() {
         orbitControls.enabled = false; // camera lock
         zoomProgress += delta * 0.6; // zoom speed
         zoomProgress = Math.min(zoomProgress, 1);
-
         camera.position.lerpVectors(initialCamPos, targetCamPos, zoomProgress);
     }else{
         orbitControls.enabled = true; // camera unlock

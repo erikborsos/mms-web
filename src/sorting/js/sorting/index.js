@@ -26,7 +26,7 @@ export function renderButtons() {
   for (let name in algorithms) {
     const button = document.createElement("button");
     button.textContent = name;
-    button.className = "btn bg-accent";
+    button.className = "btn";
     button.onclick = () => runSort(name);
     buttonsContainer.appendChild(button);
   }

@@ -149,3 +149,7 @@
 .section-text {
     @apply w-full md:w-3/5 text-xl md:text-2xl text-gray-700 dark:text-gray-300 text-left;
 }
+
+.fas {
+    @apply text-white
+}
