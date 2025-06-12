@@ -4,7 +4,114 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../style/app.css" />
+        <link rel="stylesheet" href="style.css" />
         <title>MMS Web</title>
     </head>
-    <body></body>
+    <body>
+
+    <h1>Mediengallerie</h1>
+
+    <div class="flex flex-col items-center space-y-4">
+        <h2>Bild</h2>
+        <div class="flex flex-col space-y-2 items-center mb-64">
+            <div class="mb-4">
+                <label for="modeSelect" class="mr-2 font-semibold">Mode:</label>
+                <select id="modeSelect" class="border rounded p-1">
+                    <option class="bg-neutral-950" value="filter">Filter Mode</option>
+                    <option class="bg-neutral-950" value="draw">Draw Mode</option>
+                </select>
+            </div>
+            <input type="file" class="btn" id="imageUpload" accept="image/*"/>
+            <div class="flex flex-row items-center">
+                <div class="controls m-2 flex flex-col space-y-2">
+                    <button class="btn" onclick="applyGrayscaleFilter()">Grayscale</button>
+                    <button class="btn" onclick="callThresholdFilter()">Threshold</button>
+                    <button class="btn" onclick="applySepiaFilter()">Sepia</button>
+                    <button class="btn" onclick="callSubsamplingFilter()">Subsampling</button>
+                    <button class="btn" onclick="applyInvertFilter()">Invert</button>
+                    <button class="btn" onclick="applyBoxBlur()">Blur</button>
+                    <button class="btn" onclick="applyVignette()">Vignette</button>
+                </div>
+
+                <canvas id="canvasImage" class="flex justify-center-safe"></canvas>
+
+                <div class="flex flex-col">
+                    <div id="thresholdSliderContainer" class="flex-col space-x-2 ml-2 hidden">
+                        <label for="thresholdSlider">Threshold: <span id="thresholdValue">128</span></label>
+                        <input type="range" id="thresholdSlider" min="0" max="255" value="128" class="w-32">
+                    </div>
+                    <div id="subsamplingSliderContainer" class="flex-col space-x-2 ml-2 hidden">
+                        <label for="subsamplingSlider">Sampling Rate: <span id="subsamplingValue">4</span></label>
+                        <input type="range" id="subsamplingSlider" min="1" max="8" value="4" class="w-32">
+                    </div>
+                    <div id="drawControls" class="flex flex-col items-center space-y-4 ml-2 hidden">
+                        <div>
+                            <label for="drawColor" class="block text-sm font-medium">Color</label>
+                            <input type="color" id="drawColor" value="#000000" class="w-10 h-10 p-0 border rounded">
+                        </div>
+                        <div>
+                            <label for="lineWidth" class="block text-sm font-medium">Line Width: <span id="lineWidthValue">5</span></label>
+                            <input type="range" id="lineWidth" min="1" max="50" value="5" class="w-32">
+                        </div>
+                    </div>
+                    <div class="w-32 ml-2"></div>
+                </div>
+            </div>
+            <div class="flex flex-row space-x-2">
+                <button id="resetBtn" class="btn" onclick="resetImage()"><i class="fas fa-arrow-rotate-back mr-2"></i>Reset</button>
+                <button id="saveImage" class="btn"><i class="fas fa-floppy-disk mr-2"></i>Save Image</button>
+            </div>
+        </div>
+        <h2>Audio</h2>
+        <div class="flex flex-col space-y-4 items-center mb-64">
+            <div class="mb-4">
+                <label for="visualizerSelect" class="mr-2 font-semibold">Form:</label>
+                <select id="visualizerSelect" class="border rounded p-1">
+                    <option class="bg-neutral-950" value="frequency">Frequency bars</option>
+                    <option class="bg-neutral-950" value="wave">Waveform</option>
+                </select>
+            </div>
+            <div class="flex space-x-2 items-center">
+                <input class="btn" type="file" id="audioUpload" accept="audio/*"/>
+                <button class="btn px-3" onclick="randomizeColors()"><i class="fas fa-dice"></i></button>
+            </div>
+            <canvas id="canvasAudio" width="800" height="300"></canvas>
+            <audio id="audio" controls></audio>
+        </div>
+        <h2>Video</h2>
+        <div class="flex flex-col space-y-2 items-center mb-64">
+            <video id="video" src="assets/video/NeverGonnaGiveYouUp.mp4" width="960" class="max-w-none mb-0"></video>
+            <div class="w-full px-2 bg-black pb-2">
+                <input type="range" id="seekBar" value="0" min="0" step="0.01" class="w-full accent-accent" />
+                <div class="flex justify-between w-full items-center">
+                    <div class="flex items-center space-x-2">
+                        <button id="backwards" class="cursor-pointer" onclick="backwards()"><i class="fas fa-rotate-left text-xl"></i></button>
+                        <button id="playPause" class="cursor-pointer" onclick="playPause()"><i class="fas fa-circle-play text-3xl"></i></button>
+                        <button id="forwards" class="cursor-pointer" onclick="forwards()"><i class="fas fa-rotate-right text-xl"></i></button>
+                    </div>
+                    <div class="space-x-2">
+                        <div class="relative inline-block text-center">
+                            <button id="playbackSpeedBtn" class="cursor-pointer" onclick="togglePlaybackSpeedMenu()"><i class="fas fa-gauge text-xl"></i></button>
+
+                            <div id="speedMenu" class="absolute bottom-full left-1/2 transform -translate-x-1/2 z-10 mb-2 p-1 w-48 bg-neutral-900 rounded shadow-md hidden">
+                                <label id="speedLabel" for="speedSlider" class="text-sm">Speed: 1.00x</label>
+                                <input type="range" id="speedSlider" min="0.25" max="2" step="0.25" value="1" class="w-full"
+                                        oninput="updateSpeedLabel(this.value)"
+                                        onchange="setSpeed(this.value)"
+                                />
+                            </div>
+                        </div>
+
+                        <button id="muteBtn" class="cursor-pointer"><i class="fas fa-volume-up text-xl"></i></button>
+                        <input type="range" id="volume" min="0" max="1" step="0.01" value="1" class="w-24 accent-accent">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./image.js"></script>
+    <script src="./audio.js"></script>
+    <script src="./video.js"></script>
+    </body>
 </html>
