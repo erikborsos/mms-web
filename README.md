@@ -1,4 +1,4 @@
-### Requierements:
+# Requierements:
 
 Node.js installed
 
@@ -6,7 +6,7 @@ Node.js installed
 
 - [Node.js](https://nodejs.org/) muss installiert sein (empfohlen: LTS-Version)
 
-### How to start:
+# How to start:
 
 open terminal in project folder
 
