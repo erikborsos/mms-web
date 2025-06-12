@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import "./homepage.css";
 
 
 @custom-variant dark (&:is(.dark *));
@@ -167,3 +167,4 @@
     .test {
     }
 }
+

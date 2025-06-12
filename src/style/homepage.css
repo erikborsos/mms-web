@@ -1,0 +1,151 @@
+@import "tailwindcss"; /* Import Tailwind base styles */
+@custom-variant dark (&:where(.dark, .dark *)); /* Custom variant for dark mode */
+@tailwind utilities; /* Import Tailwind utility layer */
+
+/* Fade-up animation for elements entering viewport */
+@layer utilities {
+    .fade-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Outer wrapper for each parallax section (2x viewport height) */
+.parallax-pin {
+    height: 200vh;
+    position: relative;
+}
+
+/* Inner container with fixed height for pinning effect */
+.parallax-inner {
+    height: 100vh;
+    position: relative;
+
+}
+
+/* Parallax background image with blur and hover effect */
+.parallax-background {
+    @apply blur-[3px] hover:blur-none transition-all duration-700 ease-in-out transform scale-[1.02];
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    pointer-events: auto;
+}
+
+/* Foreground content in parallax section */
+.parallax-content {
+    @apply flex flex-col justify-center items-center text-center text-white h-full;
+    z-index: 1;
+    pointer-events: none; /* Prevent blocking scroll/click */
+    will-change: transform, opacity;
+}
+
+/* Heading inside parallax content */
+.parallax-content h2 {
+    @apply text-6xl md:text-8xl font-bold text-shadow-lg/50;
+}
+
+/* Subtitle text in each parallax section */
+.section-subtext {
+    @apply mt-4 text-4xl font-bold text-white text-shadow-lg/50;
+}
+
+/* Regular content section after each parallax block */
+.section-content {
+    @apply min-h-[80vh] p-6 bg-white dark:bg-black text-neutral-900 dark:text-white;
+}
+
+/* Sticky navigation bar with blur and semi-transparent background */
+.navbar {
+    @apply sticky top-0 z-50 flex items-center justify-between border-b border-white/10 px-6 py-2 backdrop-blur-md bg-neutral-200/70 dark:bg-neutral-900/70;
+}
+
+/* Navigation list container */
+.navbar-list {
+    @apply flex flex-row flex-wrap w-9/12 items-center justify-between dark:text-white text-black text-sm md:text-lg;
+}
+
+/* Single navigation item with hover animation */
+.navbar-item {
+    @apply flex-1 relative flex items-center justify-center gap-2 cursor-pointer transition-transform duration-200 hover:-translate-y-1;
+}
+
+/* Navigation link text with light/dark mode support and hover styles */
+.navbar-text {
+    @apply text-black dark:text-white/50 dark:group-hover:text-white dark:group-hover:font-bold
+    group-hover:text-black group-hover:font-bold transition-colors duration-300 md:text-sm;
+}
+
+/* Underline animation on hover */
+.navbar-underline {
+    @apply absolute -bottom-1 left-1/2 w-0 h-1 rounded-full bg-black dark:bg-white transition-all duration-300 group-hover:w-6 group-hover:-translate-x-1/2;
+}
+
+/* Vertical divider between nav items */
+.navbar-divider {
+    @apply h-6 w-px dark:bg-white/30 bg-black self-center;
+}
+
+/* Container for the dark/light mode toggle button */
+.navbar-toggle {
+    @apply ml-4 flex items-center;
+}
+
+/* Footer styling with dark mode support */
+.footer {
+    @apply relative z-10 min-h-[20vh] bg-neutral-200 p-6 text-black dark:text-white dark:bg-neutral-900 font-bold flex justify-center items-center;
+}
+
+/*Icon styling width dark mode support using filter*/
+.theme-icon {
+    filter: invert(0);
+    transition: filter 0.3s ease;
+    width: 24px;
+    height: 24px;
+}
+
+.dark .theme-icon {
+    filter: invert(1) brightness(1.2);
+}
+
+/* Show light icon only in light mode */
+@layer components {
+    .icon-light {
+        @apply block dark:hidden h-6 w-6;
+    }
+
+    /* Show dark icon only in dark mode */
+    .icon-dark {
+        @apply hidden dark:block h-6 w-6;
+    }
+}
+
+/* Animation for scaling toggle button when clicked */
+#darkToggle {
+    transition: transform 0.15s ease;
+}
+
+/* Scale-down class used for button click feedback */
+.scale-90 {
+    transform: scale(0.9);
+}
+
+.section-wrapper {
+    @apply flex md:flex-row items-start gap-2 px-8 py-24 bg-white dark:bg-black text-black dark:text-white;
+}
+
+.section-title {
+    @apply w-full md:w-2/5 text-4xl md:text-5xl font-bold text-center;
+}
+
+.section-text {
+    @apply w-full md:w-3/5 text-xl md:text-2xl text-gray-700 dark:text-gray-300 text-left;
+}

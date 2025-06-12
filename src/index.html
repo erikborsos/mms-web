@@ -1,10 +1,197 @@
 <!doctype html>
-<html lang="en" class="dark">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style/app.css" />
-        <title>MMS Web</title>
-    </head>
-    <body></body>
+<html lang="en" class="dark"> <!-- Start HTML document in dark mode -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Responsive layout -->
+    <link rel="stylesheet" href="style/app.css" /> <!-- Tailwind + custom CSS file -->
+    <title>MMS Web</title>
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="navbar" role="navigation" aria-label="Main Navigation">
+    <ul class="navbar-list">
+
+        <!-- Home -->
+        <li class="navbar-item group">
+            <a href="index.html" class="flex flex-col items-center group">
+                <img src="https://img.icons8.com/?size=100&id=86527&format=png&color=000000" alt="Home" class="theme-icon" />
+                <span class="navbar-text">Home</span>
+                <span class="navbar-underline"></span>
+            </a>
+        </li>
+        <li class="navbar-divider"></li>
+
+        <!-- Sortierung -->
+        <li class="navbar-item group">
+            <a href="sorting/sorting.html" class="flex flex-col items-center group">
+                <img src="https://img.icons8.com/?size=100&id=21890&format=png&color=000000" alt="Sortierung" class="theme-icon" />
+                <span class="navbar-text">Sortierung</span>
+                <span class="navbar-underline"></span>
+            </a>
+        </li>
+        <li class="navbar-divider"></li>
+
+        <!-- Tetris -->
+        <li class="navbar-item group">
+            <a href="tetris/tetris.html" class="flex flex-col items-center group">
+                <img src="https://img.icons8.com/?size=100&id=47421&format=png&color=000000" alt="Tetris" class="theme-icon" />
+                <span class="navbar-text">Tetris</span>
+                <span class="navbar-underline"></span>
+            </a>
+        </li>
+        <li class="navbar-divider"></li>
+
+        <!-- 3D -->
+        <li class="navbar-item group">
+            <a href="3d/3d.html" class="flex flex-col items-center group">
+                <img src="https://img.icons8.com/?size=100&id=iUDJxrHYhzTG&format=png&color=000000" alt="3D" class="theme-icon" />
+                <span class="navbar-text">3D</span>
+                <span class="navbar-underline"></span>
+            </a>
+        </li>
+        <li class="navbar-divider"></li>
+
+        <!-- Video -->
+        <li class="navbar-item group">
+            <a href="media/media.html" class="flex flex-col items-center group">
+                <img src="https://img.icons8.com/?size=100&id=111366&format=png&color=000000" alt="Video" class="theme-icon" />
+                <span class="navbar-text">Video</span>
+                <span class="navbar-underline"></span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Dark Mode Toggle Button -->
+    <button id="darkToggle" type="button" class="navbar-toggle transition-transform duration-300 hover:scale-110">
+        <img src="https://img.icons8.com/?size=100&id=59841&format=png&color=FFFFFF" class="icon-dark" alt="Dark Icon" />
+        <img src="https://img.icons8.com/?size=100&id=648&format=png&color=1A1A1A" class="icon-light" alt="Light Icon" />
+    </button>
+</header>
+
+<!-- Hero section with main headline -->
+<section class="flex items-center justify-center h-[100vh] bg-white text-black dark:bg-black dark:text-white text-center">
+    <div>
+        <h1 class="text-4xl md:text-7xl font-bold">Mehr als Code. Eine digitale Bühne.</h1>
+        <p class="mt-4 text-3xl dark:text-gray-300 text-neutral-800 font-bold">
+            Dive into a world where sorting algorithms become tangible, gaming challenges logical thinking in real time,
+            3D objects take shape, and videos are more than just images.
+        </p>
+    </div>
+</section>
+
+<!-- Main area with parallax effects -->
+<main class="flex-1">
+
+    <!-- Sorting section with parallax background and heading -->
+    <section class="parallax-pin">
+        <div class="parallax-inner">
+            <a href="sorting/sorting.html">
+                <div class="parallax-background" style="background-image: url(../public/assets/imgs/sorting.png);"></div>
+            </a>
+            <div class="parallax-content">
+                <p class="section-subtext">Sortieralgorithmen</p>
+                <h2>Logik in Bewegung</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Text content block for Sorting section -->
+    <section class="section-content fade-up">
+        <section class="section-wrapper">
+            <div class="section-title">Sortieralgorithmen</div>
+            <div class="section-text">
+                <p>
+                    Sortieren zum Anfassen – verständlich und interaktiv. Beobachte live, wie verschiedene Algorithmen Zahlen ordnen. Durch Farbgebung und Animationen werden Vergleiche und Tausche sichtbar gemacht – inklusive Benchmark-Modus zum direkten Vergleich.
+                </p>
+            </div>
+        </section>
+    </section>
+
+    <!-- Tetris section with parallax background and heading -->
+    <section class="parallax-pin">
+        <div class="parallax-inner">
+            <a href="tetris/tetris.html">
+                <div class="parallax-background" style="background-image: url(../public/assets/imgs/tetris.png);"></div>
+            </a>
+            <div class="parallax-content">
+                <p class="section-subtext">Tetris</p>
+                <h2>Spiel trifft Struktur</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Text content block for Tetris section -->
+    <section class="section-content fade-up">
+        <section class="section-wrapper">
+            <div class="section-title">Tetris</div>
+            <div class="section-text">
+                <p>
+                    Klassisch. Herausfordernd. Zeitlos. Spiele eine moderne Variante des bekannten Tetris-Klassikers.
+                </p>
+            </div>
+        </section>
+    </section>
+
+    <!-- 3D section with parallax background and heading -->
+    <section class="parallax-pin">
+        <div class="parallax-inner">
+            <a href="3d/3d.html">
+                <div class="parallax-background" style="background-image: url(../public/assets/imgs/3D.png);"></div>
+            </a>
+            <div class="parallax-content">
+                <p class="section-subtext">3-Dimensionen</p>
+                <h2>Form wird digital</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Text content block for 3D section -->
+    <section class="section-content fade-up">
+        <section class="section-wrapper">
+            <div class="section-title">3D-Objekt</div>
+            <div class="section-text">
+                <p>
+                    Erlebe ein vollständig texturiertes und animiertes 3D-Modell direkt im Browser. Mit Echtzeit-Darstellung und interaktiver Steuerung durch Three.js kannst du das Objekt aus jedem Winkel betrachten und physikalisch realistische Bewegungen erleben.
+                </p>
+            </div>
+        </section>
+    </section>
+
+    <!-- Video section with parallax background and heading -->
+    <section class="parallax-pin">
+        <div class="parallax-inner">
+            <a href="media/media.html">
+                <div class="parallax-background" style="background-image: url(../public/assets/imgs/media.jpg);"></div>
+            </a>
+            <div class="parallax-content">
+                <p class="section-subtext">Video</p>
+                <h2>Mehr als bewegte Bilder</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Text content block for Video section -->
+    <section class="section-content fade-up">
+        <section class="section-wrapper">
+            <div class="section-title">Mediengalerie</div>
+            <div class="section-text">
+                <p>
+                    Mehr als nur Bilder: Filter, Farben, Dynamik. Wende Effekte wie Graustufen, Kontrast oder Farbinvertierung auf Bilder an und entdecke kreative Video- und Audioinhalte – direkt im Browser abspielbar.
+                </p>
+            </div>
+        </section>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    © 2025 MMS Web – All rights reserved.
+</footer>
+
+<!-- JavaScript for Dark Mode & GSAP/ScrollTrigger -->
+<script type="module" src="index.js"></script>
+<script type="module" src="darkMode.js"></script>
+</body>
 </html>
