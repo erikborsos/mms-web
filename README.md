@@ -1,8 +1,8 @@
-Requierements
+Requierements:
 
 Node.js installed
 
-How to start
+How to start:
 
 open terminal in project folder
 
