@@ -407,9 +407,8 @@
         audioPlayer.addEventListener('ended', () => {
             if (playlistCheckbox.checked) {
                 playNextTrack();
-            } else if (audioPlayer.loop) {
+            } else {
                 audioPlayer.currentTime = 0;
-
                 if (isMusicPlaying) {
                     playAudio();
                 }
